@@ -12,4 +12,4 @@ def films_list(request):
     if films.exists():
        return render(request, 'films_list.html', {'films': films})
     else:
-        return HttpResponse("hello world")
+        return HttpResponse("HOLA ALEXANDER")
