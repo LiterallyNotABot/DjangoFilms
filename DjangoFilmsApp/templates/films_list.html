@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Películas</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #1F1B24;
+            color: #E0E0E0;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background: #2C2A35;
+            color: #E0E0E0;
+            padding-top: 30px;
+            min-height: 70px;
+            border-bottom: 3px solid #BF4C3F;
+            text-align: center;
+        }
+        header h1 {
+            margin: 0;
+            font-size: 2.5em;
+        }
+        .film-card {
+            background: #2E2B36;
+            margin: 20px 0;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+            display: flex;
+            align-items: center;
+        }
+        .film-card img {
+            width: 120px;
+            height: 180px;
+            border-radius: 8px;
+            margin-right: 20px;
+        }
+        .film-info {
+            flex: 1;
+        }
+        .film-info h2 {
+            margin: 0;
+            font-size: 1.5em;
+        }
+        .film-info p {
+            margin: 5px 0;
+        }
+        .film-info .genre {
+            color: #4A5D81;
+        }
+        .no-films {
+            text-align: center;
+            font-size: 1.2em;
+            color: #777;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>Lista de Películas</h1>
+        </div>
+    </header>
+
+    <div class="container">
+        {% if films %}
+            {% for film in films %}
+                <div class="film-card">
+                    {% if film.picture_url %}
+                        <img src="{{ film.picture_url }}" alt="{{ film.title }}">
+                    {% else %}
+                        <img src="https://via.placeholder.com/120x180?text=No+Image" alt="No Image Available">
+                    {% endif %}
+                    <div class="film-info">
+                        <h2>{{ film.title }}</h2>
+                        <p><strong>Fecha de Lanzamiento:</strong> {{ film.release_year }}</p>
+                        {% if film.genres %}
+                            <p class="genre"><strong>Género:</strong> {{ film.genres }}</p>
+                        {% endif %}
+                    </div>
+                </div>
+            {% endfor %}
+        {% else %}
+            <div class="no-films">
+                No se encontraron películas.
+            </div>
+        {% endif %}
+    </div>
+</body>
+</html>
